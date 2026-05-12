@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="classes-grid">
+    {% for item in classes %}
+    <div class="cyber-card class-card">
+        <h3>{{ item.class.name }}</h3>
+        <p><strong>Кость Хитов:</strong> {{ item.class.hit_dice }}</p>
+        <p><strong>Хиты на следующих уровнях:</strong> {{ item.class.hp_next_level }}</p>
+        <p><strong>Владение оружием:</strong> {{ item.class.weapon_proficiencies }}</p>
+        <p><strong>Спасброски:</strong> {{ item.class.save_proficiencies }}</p>
+        <p><strong>Навыки:</strong> {{ item.class.skill_proficiencies }}</p>
+        <p><strong>Снаряжение:</strong><br>{{ item.class.equipment|replace('\n','<br>')|safe }}</p>
+        {% if item.class.fighting_style_choice %}
+        <p><strong>Боевой стиль:</strong><br>{{ item.class.fighting_style_choice|replace('\n','<br>')|safe }}</p>
+        {% endif %}
+        {% if item.class.second_wind %}
+        <p><strong>Второе дыхание:</strong><br>{{ item.class.second_wind|replace('\n','<br>')|safe }}</p>
+        {% endif %}
+        <div class="feature-list">
+            {% for feat in item.features %}
+            <div class="feature-item">
+                <strong>{{ feat.feature_name }}</strong>
+                <p>{{ feat.feature_description|replace('\n','<br>')|safe }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% if session.get('is_admin') %}
+        <div style="margin-top: 1rem; text-align: right;">
+            <a href="{{ url_for('delete_class', class_id=item.class.id) }}"
+               class="cyber-button"
+               style="background: #aa0000; width: auto; font-size: 0.9rem; padding: 0.3rem 1rem;"
+               onclick="return confirm('Удалить класс {{ item.class.name }}? Это действие необратимо.');">
+               Удалить
+            </a>
+        </div>
+        {% endif %}
+    </div>
+    {% else %}
+    <p>Классы пока не добавлены. Зайдите в админ-панель.</p>
+    {% endfor %}
+</div>
+{% endblock %}

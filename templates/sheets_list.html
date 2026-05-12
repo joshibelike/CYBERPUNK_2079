@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="sheet-list-container">
+    <div class="sheet-list-header">
+        <h2>Мои персонажи</h2>
+        <a href="{{ url_for('new_sheet') }}" class="cyber-button sheet-create-btn">+ Создать нового</a>
+    </div>
+
+    {% if sheets %}
+        <div class="sheet-grid">
+            {% for sheet in sheets %}
+                <div class="sheet-card">
+                    <h3 class="sheet-card-title">{{ sheet.name }}</h3>
+                    <p class="sheet-card-info"><strong>Класс:</strong> {{ sheet.class }}</p>
+                    <p class="sheet-card-info"><strong>Уровень:</strong> {{ sheet.level }}</p>
+                    <p class="sheet-card-date"><strong>Обновлён:</strong> {{ sheet.updated }}</p>
+                    <div class="sheet-card-actions">
+                        <a href="{{ url_for('sheet_edit', sheet_id=sheet.id) }}" class="cyber-button sheet-btn-open">Открыть</a>
+                        <form action="{{ url_for('delete_sheet', sheet_id=sheet.id) }}" method="post" onsubmit="return confirm('Удалить персонажа?');" class="sheet-delete-form">
+                            <button type="submit" class="cyber-button sheet-btn-delete">Удалить</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="sheet-empty-msg">У вас пока нет персонажей. Нажмите «Создать нового».</p>
+    {% endif %}
+</div>
+{% endblock %}

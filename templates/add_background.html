@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profile-card">
+    <h2>Добавить предысторию</h2>
+    <form method="post" class="cyber-form">
+        <label>Название</label>
+        <input type="text" name="name" required>
+        <label>Описание</label>
+        <textarea name="description" rows="4" required></textarea>
+        <label>Навыки (через запятую)</label>
+        <input type="text" name="skill_proficiencies" required>
+        <label>Снаряжение</label>
+        <textarea name="equipment" rows="3" required></textarea>
+        <label>Языки</label>
+        <input type="text" name="languages">
+        <label>Название особенности</label>
+        <input type="text" name="feature_name" required>
+        <label>Описание особенности</label>
+        <textarea name="feature_description" rows="3" required></textarea>
+
+        <h3>Группы выбора (клан, деятельность и т.п.)</h3>
+        <div id="groups-container">
+            <div class="dynamic-group">
+                <label>Заголовок группы (например: "Выбор клана")</label>
+                <input type="text" name="group_title[]">
+                <label>Опции (каждая строка в формате "Название: бонус")</label>
+                <textarea name="group_options[]" rows="3" placeholder="Клан Миротворцев: +1 к Присутствию&#10;Семья Альдекальдо: +1 к Эго"></textarea>
+            </div>
+        </div>
+        <button type="button" onclick="addGroup()" class="cyber-button" style="width: auto;">+ Добавить группу выбора</button>
+        <button type="submit" class="cyber-button" style="margin-top: 1rem;">Создать предысторию</button>
+    </form>
+</div>
+<script>
+    function addGroup() {
+        const container = document.getElementById('groups-container');
+        const div = document.createElement('div');
+        div.className = 'dynamic-group';
+        div.innerHTML = `
+            <label>Заголовок группы</label>
+            <input type="text" name="group_title[]">
+            <label>Опции (строка: бонус)</label>
+            <textarea name="group_options[]" rows="3"></textarea>
+        `;
+        container.appendChild(div);
+    }
+</script>
+{% endblock %}

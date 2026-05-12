@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profile-card">
+    <h2>АДМИН-ПАНЕЛЬ</h2>
+    <div style="display: flex; gap: 1rem; justify-content: center; margin: 1rem 0;">
+        <a href="{{ url_for('add_class') }}" class="cyber-button" style="display: inline-block; width: auto;">Добавить класс</a>
+        <a href="{{ url_for('add_background') }}" class="cyber-button" style="display: inline-block; width: auto;">Добавить предысторию</a>
+    </div>
+    <h3>Управление пользователями</h3>
+    <table class="admin-table">
+        <thead><tr><th>ID</th><th>Имя</th><th>Email</th><th>Админ?</th><th>Действие</th></tr></thead>
+        <tbody>
+        {% for u in users %}
+        <tr>
+            <td>{{ u.id }}</td><td>{{ u.username }}</td><td>{{ u.email }}</td>
+            <td>{% if u.is_admin %}Да{% else %}Нет{% endif %}</td>
+            <td>{% if u.id != session['user_id'] %}<a href="{{ url_for('toggle_admin', user_id=u.id) }}">{% if u.is_admin %}Лишить прав{% else %}Назначить админом{% endif %}</a>{% else %}вы{% endif %}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="{{ url_for('account') }}" class="cyber-button" style="display: inline-block;">← Назад в профиль</a>
+</div>
+{% endblock %}

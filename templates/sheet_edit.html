@@ -1,0 +1,308 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profile-card" style="max-width: 1000px; width: 95%;">
+    <form id="sheetForm">
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
+            <div style="flex:1; min-width:150px">
+                <label>Ф.И.О:</label>
+                <input type="text" class="cyber-input-wide" name="name" value="{{ sheet.name }}" style="background:black; color:yellow; font-weight:bold;">
+            </div>
+            <div style="flex:1; min-width:150px">
+                <label>Класс:</label>
+                <input type="text" class="cyber-input-wide" name="class" value="{{ sheet.class }}">
+            </div>
+            <div style="flex:1; min-width:150px">
+                <label>Уровень:</label>
+                <select name="level" class="cyber-input-wide">
+                    {% for i in range(1,21) %}
+                    <option value="{{ i }}" {% if sheet.level == i %}selected{% endif %}>{{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div style="flex:1; min-width:150px">
+                <label>Предыстория:</label>
+                <input type="text" class="cyber-input-wide" name="background" value="{{ sheet.background }}">
+            </div>
+        </div>
+
+        <div class="sheet-edit-grid" style="display: grid; grid-template-columns: 250px 1fr 1fr; gap: 1.5rem; margin-top: 2rem;">
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <div style="border: 2px solid black; padding: 0.5rem; background: rgba(255,255,0,0.05);">
+                    <div style="font-weight:bold; text-align:center;">ХАРАКТЕРИСТИКИ</div>
+
+                    <div class="stat-row">
+                        <div class="stat-box">
+                            <input type="number" class="stat-mod" id="mod_strength" readonly>
+                            <input type="number" class="stat-value" data-stat="strength" min="1" max="30" value="{{ sheet.stats.strength }}">
+                            <label>[СИЛА]</label>
+                        </div>
+                    </div>
+
+                    <div class="stat-row">
+                        <div class="stat-box">
+                            <input type="number" class="stat-mod" id="mod_system" readonly>
+                            <input type="number" class="stat-value" data-stat="system" min="1" max="30" value="{{ sheet.stats.system }}">
+                            <label>[СИСТЕМА]</label>
+                        </div>
+                    </div>
+
+                    <div class="stat-row">
+                        <div class="stat-box">
+                            <input type="number" class="stat-mod" id="mod_dexterity" readonly>
+                            <input type="number" class="stat-value" data-stat="dexterity" min="1" max="30" value="{{ sheet.stats.dexterity }}">
+                            <label>[ЛОВКОСТЬ]</label>
+                        </div>
+                    </div>
+
+                    <div class="stat-row">
+                        <div class="stat-box">
+                            <input type="number" class="stat-mod" id="mod_wisdom" readonly>
+                            <input type="number" class="stat-value" data-stat="wisdom" min="1" max="30" value="{{ sheet.stats.wisdom }}">
+                            <label>[МУДРОСТЬ]</label>
+                        </div>
+                    </div>
+
+                    <div class="stat-row">
+                        <div class="stat-box">
+                            <input type="number" class="stat-mod" id="mod_charisma" readonly>
+                            <input type="number" class="stat-value" data-stat="charisma" min="1" max="30" value="{{ sheet.stats.charisma }}">
+                            <label>[ХАРИЗМА]</label>
+                        </div>
+                    </div>
+
+                    <div class="stat-row">
+                        <div class="stat-box">
+                            <input type="number" class="stat-mod" id="mod_intelligence" readonly>
+                            <input type="number" class="stat-value" data-stat="intelligence" min="1" max="30" value="{{ sheet.stats.intelligence }}">
+                            <label>[ИНТЕЛЛЕКТ]</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="border: 2px solid black; padding: 0.5rem; background: rgba(255,255,0,0.05); margin-top:0.5rem;">
+                    <div style="font-weight:bold; text-align:center; font-size:0.9rem;">СПАСБРОСКИ</div>
+                    {% for save in ['Сила', 'Система', 'Ловкость', 'Мудрость', 'Харизма', 'Интеллект'] %}
+                    <div style="display:flex; gap:0.5rem; align-items:center; font-size:0.9rem;">
+                        <input type="checkbox" name="save_prof_{{ loop.index }}" {% if 'save_prof_' + loop.index|string in saves %}checked{% endif %}>
+                        <span>{{ save }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div style="border: 2px solid black; padding: 0.5rem; text-align:center;">
+                    <label>ИНИЦИАТИВА</label>
+                    <input type="number" name="initiative" value="{{ sheet.initiative }}" class="cyber-input-wide" style="width:50px; text-align:center; margin:0 auto;">
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="border:2px solid black; padding:0.5rem;">
+                    <label>ПАССИВ. НАВЫКИ</label>
+                    <input type="text" name="passive_skills" value="{{ sheet.passive_skills }}" class="cyber-input-wide" style="width:80%;">
+                </div>
+                <div style="border:2px solid black; padding:0.5rem; height:180px; display:flex; flex-direction:column;">
+                    <label>ФОТОГРАФИЯ</label>
+                    <div style="flex:1; border:2px dashed black; display:flex; align-items:center; justify-content:center; background:#ff0;">
+                        <span style="color:black; opacity:0.5;">[Фото]</span>
+                    </div>
+                </div>
+                <div style="border:2px solid black; padding:0.5rem; flex:1;">
+                    <label>ЯЗЫКИ И ДРУГОЕ</label>
+                    <textarea name="languages" rows="4" class="cyber-input-wide" style="width:100%;">{{ sheet.languages }}</textarea>
+                </div>
+            </div>
+
+            <div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap:0.5rem; margin-bottom:1rem;">
+                    <div><label>Скорость</label><input type="number" name="speed" value="{{ sheet.speed }}" class="cyber-input-wide"></div>
+                    <div><label>Класс защиты</label><input type="number" name="armor_class" value="{{ sheet.armor_class }}" class="cyber-input-wide"></div>
+                    <div style="grid-column: span 2;"><label>Мировоззрение</label><input type="text" name="alignment" value="{{ sheet.alignment }}" class="cyber-input-wide"></div>
+                </div>
+                <div style="border:2px solid black; padding:0.5rem; margin-bottom:0.5rem;">
+                    <div><label>Хиты:</label><input type="number" name="hp_max" value="{{ sheet.hp_max }}" class="cyber-input-wide"></div>
+                    <div><label>Текущие хиты:</label><input type="number" name="hp_current" value="{{ sheet.hp_current }}" class="cyber-input-wide"></div>
+                    <div><label>Кость хитов:</label><input type="text" name="hit_dice" value="{{ sheet.hit_dice }}" class="cyber-input-wide"></div>
+                </div>
+                <div style="border:2px solid black; padding:0.5rem; height:200px; display:flex; flex-direction:column;">
+                    <label>ЧЕРТЫ</label>
+                    <textarea name="features" rows="5" class="cyber-input-wide" style="width:100%; flex:1;">{{ sheet.features }}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div style="border:2px solid black; padding:1rem; margin-top:1.5rem;">
+            <div style="font-weight:bold; text-align:center; margin-bottom:0.5rem;">НАВЫКИ</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:0.5rem;">
+                {% for skill in sheet.skills %}
+                <div style="display:flex; align-items:center; gap:0.3rem; border-bottom:1px solid rgba(0,0,0,0.1);">
+                    <input type="checkbox" class="skill-prof" data-skill="{{ loop.index0 }}" {% if skill.proficient %}checked{% endif %}>
+                    <input type="checkbox" class="skill-expert" data-skill="{{ loop.index0 }}" {% if skill.expertise %}checked{% endif %}>
+                    <span style="flex:1; font-size:0.9rem;">{{ skill.name }}</span>
+                    <input type="text" class="skill-bonus" style="width:35px; text-align:center; font-weight:bold; border:none; background:transparent;" readonly value="0">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin-top:1rem;">
+            <div style="border:2px solid black; padding:0.5rem;">
+                <label>Снаряжение</label>
+                <textarea name="equipment" rows="3" class="cyber-input-wide" style="width:100%;">{{ sheet.equipment }}</textarea>
+            </div>
+            <div style="border:2px solid black; padding:0.5rem;">
+                <label>Заметки</label>
+                <textarea name="notes" rows="3" class="cyber-input-wide" style="width:100%;">{{ sheet.notes }}</textarea>
+            </div>
+        </div>
+
+        <div style="display:flex; justify-content: flex-end; gap:1rem; margin-top:2rem;">
+            <a href="{{ url_for('sheets_list') }}" class="cyber-button" style="width: auto; background:#333;">← Назад</a>
+            <button type="button" id="saveSheet" class="cyber-button" style="width: auto;">Сохранить</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    const modTable = {
+        '1': -5, '2': -4, '3': -4, '4': -3, '5': -3, '6': -2, '7': -2, '8': -1, '9': -1,
+        '10': 0, '11': 0, '12': 1, '13': 1, '14': 2, '15': 2, '16': 3, '17': 3, '18': 4,
+        '19': 4, '20': 5, '21': 5, '22': 6, '23': 6, '24': 7, '25': 7, '26': 8, '27': 8,
+        '28': 9, '29': 9, '30': 10
+    };
+
+    function getMod(value) {
+        value = parseInt(value) || 10;
+        if (value < 1) value = 1;
+        if (value > 30) value = 30;
+        return modTable[String(value)] || 0;
+    }
+
+    function updateStats() {
+        document.querySelectorAll('.stat-value').forEach(input => {
+            const statName = input.dataset.stat;
+            const val = parseInt(input.value) || 10;
+            const mod = getMod(val);
+            const modInput = document.getElementById('mod_' + statName);
+            if (modInput) modInput.value = mod;
+        });
+
+        let proficiencyBonus = 2;
+        const level = parseInt(document.querySelector('select[name="level"]').value) || 1;
+        if (level >= 5) proficiencyBonus = 3;
+        if (level >= 9) proficiencyBonus = 4;
+        if (level >= 13) proficiencyBonus = 5;
+        if (level >= 17) proficiencyBonus = 6;
+
+        document.querySelectorAll('.skill-bonus').forEach(bonusInput => {
+            const skillDiv = bonusInput.closest('div');
+            const skillName = skillDiv.querySelector('span').innerText.trim();
+            const statMap = {
+                'Эго': 'charisma',
+                'Присутствие': 'charisma',
+                'Соц. рейтинг': 'intelligence',
+                'Проворство': 'dexterity',
+                'Реакция': 'dexterity',
+                'Скрытность': 'dexterity',
+                'Внимательность': 'wisdom',
+                'Хладнокровие': 'wisdom',
+                'Техника': 'intelligence',
+                'Медицина': 'intelligence',
+                'Наука': 'intelligence',
+                'Огнестрел. оружие': 'system',
+                'Холодное оружие': 'strength',
+                'Устойчивость(имп)': 'constitution',
+                'Устойчивость(скр)': 'constitution'
+            };
+            const relatedStat = statMap[skillName] || 'strength';
+            const statValue = parseInt(document.querySelector(`.stat-value[data-stat="${relatedStat}"]`).value) || 10;
+            const statMod = getMod(statValue);
+
+            const profChecked = skillDiv.querySelector('.skill-prof').checked;
+            const expertChecked = skillDiv.querySelector('.skill-expert').checked;
+
+            let bonus = statMod;
+            if (expertChecked) {
+                bonus += proficiencyBonus * 2;
+            } else if (profChecked) {
+                bonus += proficiencyBonus;
+            }
+            bonusInput.value = bonus;
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.stat-value').forEach(input => {
+            input.addEventListener('input', updateStats);
+        });
+        document.querySelector('select[name="level"]').addEventListener('change', updateStats);
+        document.querySelectorAll('.skill-prof, .skill-expert').forEach(cb => {
+            cb.addEventListener('change', updateStats);
+        });
+
+        document.getElementById('saveSheet').addEventListener('click', function() {
+            const form = document.getElementById('sheetForm');
+            const formData = new FormData(form);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                if (key.endsWith('[]')) {
+                    const realKey = key.slice(0, -2);
+                    if (!data[realKey]) data[realKey] = [];
+                    data[realKey].push(value);
+                } else {
+                    data[key] = value;
+                }
+            }
+            const skills = [];
+            document.querySelectorAll('.skill-bonus').forEach(bonusInput => {
+                const div = bonusInput.closest('div');
+                const name = div.querySelector('span').innerText.trim();
+                const prof = div.querySelector('.skill-prof').checked;
+                const expert = div.querySelector('.skill-expert').checked;
+                const statMap = {
+                    'Эго': 'charisma',
+                    'Присутствие': 'charisma',
+                    'Соц. рейтинг': 'intelligence',
+                    'Проворство': 'dexterity',
+                    'Реакция': 'dexterity',
+                    'Скрытность': 'dexterity',
+                    'Внимательность': 'wisdom',
+                    'Хладнокровие': 'wisdom',
+                    'Техника': 'intelligence',
+                    'Медицина': 'intelligence',
+                    'Наука': 'intelligence',
+                    'Огнестрел. оружие': 'system',
+                    'Холодное оружие': 'strength',
+                    'Устойчивость(имп)': 'constitution',
+                    'Устойчивость(скр)': 'constitution'
+                };
+                const stat = statMap[name] || 'strength';
+                skills.push({ name, stat, proficient: prof, expertise: expert });
+            });
+            data.skills = skills;
+
+            const stats = {};
+            document.querySelectorAll('.stat-value').forEach(input => {
+                stats[input.dataset.stat] = parseInt(input.value) || 10;
+            });
+            data.stats = stats;
+
+            fetch('{{ url_for("sheet_edit", sheet_id=sheet_id) }}', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(result => {
+                if (result.status === 'ok') {
+                    alert('Сохранено!');
+                } else {
+                    alert('Ошибка сохранения.');
+                }
+            });
+        });
+
+        updateStats();
+    });
+</script>
+{% endblock %}

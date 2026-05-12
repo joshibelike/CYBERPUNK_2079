@@ -1,0 +1,771 @@
+/* шрифты */
+/* Blender Pro Bold */
+@font-face {
+    font-family: 'Blender Pro';
+    src: url('../fonts/BlenderPro-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Blender Pro Bold Italic */
+@font-face {
+    font-family: 'Blender Pro';
+    src: url('../fonts/BlenderPro-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Blender Pro Book */
+@font-face {
+    font-family: 'Blender Pro';
+    src: url('../fonts/BlenderPro-Book.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Blender Pro Book Italic */
+@font-face {
+    font-family: 'Blender Pro';
+    src: url('../fonts/BlenderPro-BookItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Blender Pro Heavy */
+@font-face {
+    font-family: 'Blender Pro';
+    src: url('../fonts/BlenderPro-Heavy.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Blender Pro Medium */
+@font-face {
+    font-family: 'Blender Pro';
+    src: url('../fonts/BlenderPro-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Blender Pro Medium Italic */
+@font-face {
+    font-family: 'Blender Pro';
+    src: url('../fonts/BlenderPro-Mediumltalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Blender Pro Thin */
+@font-face {
+    font-family: 'Blender Pro';
+    src: url('../fonts/BlenderPro-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Blender Pro Thin Italic */
+@font-face {
+    font-family: 'Blender Pro';
+    src: url('../fonts/BlenderPro-ThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Cyberpunk_RUS_BY_LYAJKA */
+@font-face {
+    font-family: 'Cyberpunk RUS';
+    src: url('../fonts/Cyberpunk_RUS_BY_LYAJKA.otf') format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+.cyberpunk_text {
+    font-family: 'Cyberpunk RUS', sans-serif;
+    letter-spacing: 1px;
+}
+
+/* общее */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    font-family: 'Blender Pro', sans-serif;
+    color: #000;
+    line-height: 1.3;
+}
+
+/* меню */
+
+.header {
+    background: yellow;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 35px), 75% calc(100% - 35px), 72.5% 100%, 27.5% 100%, 25% calc(100% - 35px), 0 calc(100% - 35px), 0 0);
+    min-height: 70px;       
+    display: flex;
+    align-items: center;
+    padding: 15px 0; 
+}
+
+.header_menu {
+    padding: 0 40px;        
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;    
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 12px;
+}
+
+.header_menu h2 {
+    font-weight: bold;
+    font-size: clamp(1rem, 3vw, 1.6rem);
+    cursor: default;
+    transition: opacity 0.2s;
+    margin: 0;                
+}
+
+.header_menu h1 {
+    font-size: clamp(1.2rem, 5vw, 2.8rem);
+    white-space: nowrap;
+    margin: 0;
+}
+
+@media (max-width: 900px) {
+    .header_menu {
+        justify-content: center;
+        padding: 3px 20px 0 20px;
+    }
+    .header_menu h1 {
+        order: -1;
+        width: 100%;
+        text-align: center;
+        white-space: normal;
+        margin-top: 10px;
+    }
+}
+
+/* основная страница */
+
+.boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 4vw;
+    padding: 5vh 5vw;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.boxes-left {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    flex: 0 1 auto;
+    min-width: 280px;
+}
+
+.box {
+    background-color: yellow;
+    height: 35vh;
+    width: 50vh;
+    clip-path: polygon(0px 25px, 26px 0px, calc(60% - 25px) 0px, 60% 25px, 100% 25px, 100% calc(100% - 10px), calc(100% - 15px) calc(100% - 10px), calc(80% - 10px) calc(100% - 10px), calc(80% - 15px) 100%, 80px calc(100% - 0px), 65px calc(100% - 15px), 0% calc(100% - 15px));
+    transition: all 0.25s linear;
+    overflow-y: auto;
+}
+
+.bigger_box {
+    background-color: yellow;
+    width: 50vh;
+    clip-path: polygon(0px 25px, 26px 0px, calc(60% - 25px) 0px, 60% 25px, 100% 25px, 100% calc(100% - 10px), calc(100% - 15px) calc(100% - 10px), calc(80% - 10px) calc(100% - 10px), calc(80% - 15px) 100%, 80px calc(100% - 0px), 65px calc(100% - 15px), 0% calc(100% - 15px));
+    transition: all 0.25s linear;
+    overflow-y: auto;
+
+    height: auto;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.boxes .bigger_box {
+    height: auto;
+    min-height: 100%;
+}
+
+.boxcontent {
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.boxcontent h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    border-left: 5px solid black;
+    padding-left: 15px;
+    margin-bottom: 8px;
+}
+
+.boxcontent p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: justify;
+}
+
+/* адаптивка */
+@media (max-width: 1100px) {
+    .boxes {
+        flex-direction: column;
+        align-items: center;
+        gap: 5vh;
+    }
+    .boxes-left {
+        width: 100%;
+        align-items: center;
+    }
+    .box, .bigger_box {
+        width: 75vw;
+        max-width: 500px;
+    }
+    .box {
+        height: auto;
+        min-height: 35vh;
+    }
+    .bigger_box {
+        min-height: 45vh;
+        height: auto;
+    }
+    .boxcontent {
+        padding: 30px 25px;
+    }
+}
+
+@media (max-width: 600px) {
+    .boxcontent h2 {
+        font-size: 1.4rem;
+    }
+    .boxcontent p {
+        font-size: 1rem;
+    }
+    .boxcontent {
+        padding: 20px;
+    }
+}
+
+/* футер */
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+    text-align: center;
+    margin-top: 6vh;
+}
+
+.footer_lore {
+    background: yellow;
+    margin-top: auto;
+    padding: 2.5vh 5vw;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), 95% 100%, 5% 100%, 0 calc(100% - 20px));
+}
+
+.footer_lore h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.footer_lore h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 10px 0 8px;
+}
+
+.footer_lore a {
+    color: black;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 600;
+    display: inline-block;
+    margin: 5px 12px;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+}
+
+.footer_lore a:hover {
+    border-bottom-color: black;
+    transform: translateY(-2px);
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+ul, li {
+    list-style: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.box:hover, .bigger_box:hover {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 0, 0.5));
+    transform: scale(1.01);
+}
+
+
+/* сообщения */
+
+.flash-messages {
+    max-width: 1200px;
+    margin: 1rem auto;
+    padding: 0 2rem;
+}
+.flash {
+    background: #ffcc00;
+    color: #000;
+    border-left: 8px solid #000;
+    padding: 0.8rem 1.5rem;
+    margin-bottom: 0.8rem;
+    font-weight: bold;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), 95% 100%, 0 100%);
+}
+.flash.success { background: #99ff00; border-left-color: #006600; }
+.flash.danger { background: #ff4444; border-left-color: #660000; color: white; }
+.flash.info { background: #33ccff; border-left-color: #003366; }
+
+/* форма */
+.cyber-form {
+    background: yellow;
+    padding: 2rem;
+    margin: 2rem auto;
+    width: 100%;
+    max-width: 500px;
+    clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));
+}
+.cyber-form input, .cyber-form textarea, .cyber-form select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    background: black;
+    border: 2px solid black;
+    color: yellow;
+    font-family: 'Blender Pro', monospace;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.cyber-form input:focus {
+    outline: none;
+    border-color: #ffcc00;
+    box-shadow: 0 0 5px yellow;
+}
+.cyber-form label {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.cyber-button {
+    background: black;
+    color: yellow;
+    border: none;
+    padding: 12px 24px;
+    font-family: 'Blender Pro', sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+    transition: all 0.2s;
+    margin-top: 15px;
+    width: 100%;
+}
+.cyber-button:hover {
+    background: #222;
+    transform: scale(1.02);
+    letter-spacing: 1px;
+}
+
+/* карточка профиля */
+.profile-card {
+    background: yellow;
+    padding: 2rem;
+    text-align: center;
+    clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));
+    max-width: 900px;
+    margin: 2rem auto;
+}
+.avatar {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 0;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%);
+    border: 3px solid black;
+    margin: 15px 0;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+.tab-link {
+    background: black;
+    color: yellow;
+    padding: 10px 20px;
+    font-weight: bold;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), 90% 100%, 0 100%);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+.tab-link.active {
+    background: yellow;
+    color: black;
+    box-shadow: 0 0 10px yellow;
+}
+.tab-pane {
+    display: none;
+}
+.tab-pane.active {
+    display: block;
+}
+
+/* таблица администрирования */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(0,0,0,0.7);
+    color: yellow;
+}
+.admin-table th, .admin-table td {
+    border: 1px solid yellow;
+    padding: 10px;
+    text-align: left;
+}
+.admin-table a {
+    color: #ffcc00;
+    text-decoration: underline;
+}
+
+/* аккаунт */
+.profile-card {
+    min-height: 70vh;
+}
+
+.tab-link.active {
+    background: yellow;
+    color: black;
+    box-shadow: 0 0 0 2px black, 0 0 0 4px yellow;
+    outline: none;
+}
+
+.main-content {
+    flex: 1;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.footer {
+    margin-top: auto;
+}
+.cyber-card {
+    background: yellow;
+    padding: 1.5rem;
+    clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.cyber-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(255,255,0,0.6);
+}
+.classes-grid, .backgrounds-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+.class-card h3, .bg-card h3 {
+    font-size: 2rem;
+    border-left: 5px solid black;
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+}
+.class-card p, .bg-card p {
+    margin: 0.5rem 0;
+    line-height: 1.4;
+}
+.feature-list {
+    margin-top: 1rem;
+    border-top: 2px dashed black;
+    padding-top: 0.5rem;
+}
+.feature-item {
+    margin: 0.8rem 0;
+}
+.feature-item strong {
+    display: block;
+    font-size: 1.1rem;
+}
+.choice-group {
+    margin: 1rem 0;
+}
+.choice-group h4 {
+    font-size: 1.2rem;
+    background: black;
+    color: yellow;
+    display: inline-block;
+    padding: 0.2rem 1rem;
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+}
+.choice-option {
+    border-left: 4px solid black;
+    padding-left: 12px;
+    margin: 12px 0;
+}
+.choice-option p {
+    margin: 0;
+}
+@media (max-width: 700px) {
+    .classes-grid, .backgrounds-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+    .cyber-card {
+        padding: 1rem;
+    }
+}
+.dynamic-feature, .dynamic-group {
+    background: rgba(0,0,0,0.1);
+    padding: 1rem;
+    margin: 1rem 0;
+    border-left: 5px solid black;
+}
+
+.classes-grid, .backgrounds-grid {
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+@media (max-width: 700px) {
+    .classes-grid, .backgrounds-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+}
+
+.cyber-input-wide {
+    width: 100%;
+    padding: 5px;
+    background: black;
+    color: yellow;
+    border: 1px solid yellow;
+    font-family: 'Blender Pro', sans-serif;
+    font-weight: bold;
+}
+
+.cyber-input-wide:focus {
+    outline: none;
+    border-color: #ffcc00;
+    box-shadow: 0 0 5px yellow;
+}
+
+.stat-row {
+    margin: 0.2rem 0;
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid black;
+    padding: 0.2rem;
+    margin: 0.2rem 0;
+    background: black;
+    color: yellow;
+}
+
+.stat-mod {
+    width: 40px;
+    text-align: center;
+    background: yellow;
+    color: black;
+    font-weight: bold;
+    border: none;
+}
+
+.stat-value {
+    width: 40px;
+    text-align: center;
+    background: black;
+    color: yellow;
+    border: 1px solid yellow;
+}
+
+.skill-bonus {
+    width: 35px;
+    text-align: center;
+    font-weight: bold;
+    border: none;
+    background: transparent;
+}
+
+/* адаптивка */
+@media (max-width: 700px) {
+    .sheet-edit-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+.sheet-list-container {
+    max-width: 900px;
+    margin: 2rem auto;
+}
+
+.sheet-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.sheet-create-btn {
+    width: auto !important;
+}
+
+.sheet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.sheet-card {
+    background: yellow;
+    padding: 1.5rem;
+    clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.sheet-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(255,255,0,0.6);
+}
+
+.sheet-card-title {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+    word-break: break-word;
+}
+
+.sheet-card-info {
+    margin: 0.2rem 0;
+}
+
+.sheet-card-date {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin: 0.3rem 0 0.8rem 0;
+}
+
+.sheet-card-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+}
+
+.sheet-btn-open {
+    width: auto !important;
+    padding: 0.3rem 1rem;
+    font-size: 0.9rem;
+}
+
+.sheet-btn-delete {
+    width: auto !important;
+    padding: 0.3rem 1rem;
+    font-size: 0.9rem;
+    background: #aa0000 !important;
+}
+
+.sheet-btn-delete:hover {
+    background: #cc0000 !important;
+}
+
+.sheet-delete-form {
+    display: inline;
+}
+
+.sheet-empty-msg {
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 2rem 0;
+}
+
+@media (max-width: 600px) {
+    .sheet-list-header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    .sheet-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cyber-card, .class-card, .bg-card, .feature-item, .choice-option {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+.cyber-card h3, .class-card h3, .bg-card h3 {
+    word-break: break-word;
+}
+
+.cyber-card p, .class-card p, .bg-card p, .feature-item p, .choice-option p {
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+.classes-grid, .backgrounds-grid {
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+@media (max-width: 700px) {
+    .classes-grid, .backgrounds-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+}

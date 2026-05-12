@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBERPUNK 2079 - SPACE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <ul class="header_menu">
+            <a href="{{ url_for('show_classes') }}" style="text-decoration: none;"><h2>Классы</h2></a>
+            <a href="{{ url_for('show_backgrounds') }}" style="text-decoration: none;"><h2>Предыстории</h2></a>
+            <a href="{{ url_for('index') }}" style="text-decoration: none;"><h1 class="cyberpunk_text">CYBERPUNK 2079 - SPACE</h1></a>
+            <a href="{{ url_for('sheets_list') }}" style="text-decoration: none;"><h2>Лист</h2></a>
+            <a href="{{ url_for('index') }}" style="text-decoration: none;"><h2>Лор</h2></a>
+            <a href="{{ url_for('account') }}" style="text-decoration: none;"><h2>(АККАУНТ)</h2></a>
+        </ul>
+    </div>
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+    </div>
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+    <div class="footer">
+        <div class="footer_lore">
+            <h2>Данный сайт был создан в качестве итогового проекта для Яндекс.Лицея 2025-2026 программы ПРОМЫШЛЕННОЕ ПРОГРАМИРОВАНИЕ</h2>
+            <h3>Автор сайта: Турлова М.Д.</h3>
+            <a href="https://discordapp.com/users/joshibelike" target="_blank">DISCORD</a>
+            <a href="https://github.com/joshibelike" target="_blank">GITHUB</a>
+            <a href="https://t.me/joshibelike" target="_blank">TG</a>
+        </div>
+    </div>
+</body>
+</html>

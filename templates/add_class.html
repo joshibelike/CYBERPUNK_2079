@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profile-card">
+    <h2>Добавить новый класс</h2>
+    <form method="post" class="cyber-form">
+        <label>Название класса</label>
+        <input type="text" name="name" required>
+        <label>Кость Хитов</label>
+        <input type="text" name="hit_dice" placeholder="1к10 за каждый уровень" required>
+        <label>Хиты на следующих уровнях</label>
+        <input type="text" name="hp_next_level" placeholder="1к10 (или 6) + модификатор" required>
+        <label>Владение оружием</label>
+        <input type="text" name="weapon_proficiencies" required>
+        <label>Спасброски</label>
+        <input type="text" name="save_proficiencies" required>
+        <label>Навыки</label>
+        <input type="text" name="skill_proficiencies" required>
+        <label>Снаряжение (можно с переносами)</label>
+        <textarea name="equipment" rows="4" required></textarea>
+        <label>Боевой стиль (опционально)</label>
+        <textarea name="fighting_style_choice" rows="5" placeholder="Стрелок: +2 к урону..."></textarea>
+        <label>Второе дыхание (опционально)</label>
+        <textarea name="second_wind" rows="2"></textarea>
+
+        <h3>Особенности класса</h3>
+        <div id="features-container">
+            <div class="dynamic-feature">
+                <label>Название особенности</label>
+                <input type="text" name="feature_name[]" placeholder="Например: Боевой стиль">
+                <label>Описание</label>
+                <textarea name="feature_description[]" rows="2"></textarea>
+            </div>
+        </div>
+        <button type="button" onclick="addFeature()" class="cyber-button" style="width: auto; margin: 0 0 1rem 0;">+ Добавить ещё особенность</button>
+        <button type="submit" class="cyber-button">Создать класс</button>
+    </form>
+</div>
+<script>
+    function addFeature() {
+        const container = document.getElementById('features-container');
+        const div = document.createElement('div');
+        div.className = 'dynamic-feature';
+        div.innerHTML = `
+            <label>Название особенности</label>
+            <input type="text" name="feature_name[]" placeholder="Особенность">
+            <label>Описание</label>
+            <textarea name="feature_description[]" rows="2"></textarea>
+        `;
+        container.appendChild(div);
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="backgrounds-grid">
+    {% for bg_item in backgrounds %}
+    <div class="cyber-card bg-card">
+        <h3>{{ bg_item.background.name }}</h3>
+        <p><strong>Описание:</strong> {{ bg_item.background.description|replace('\n','<br>')|safe }}</p>
+        <p><strong>Навыки:</strong> {{ bg_item.background.skill_profs }}</p>
+        <p><strong>Снаряжение:</strong> {{ bg_item.background.equipment|replace('\n','<br>')|safe }}</p>
+        {% if bg_item.background.languages %}
+        <p><strong>Языки:</strong> {{ bg_item.background.languages }}</p>
+        {% endif %}
+        {% for group in bg_item.choice_groups %}
+        <div class="choice-group">
+            <h4>{{ group.group_title }}</h4>
+            {% set options = group.options_json|safe %}
+            {% if options is string %}{% set options = options|tojson|safe %}{% endif %}
+            {% for opt in options %}
+            <div class="choice-option">
+                <strong>{{ opt.name }}</strong>
+                <p>{{ opt.bonus }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <div class="feature-item">
+            <strong>{{ bg_item.background.feature_name }}</strong>
+            <p>{{ bg_item.background.feature_description|replace('\n','<br>')|safe }}</p>
+        </div>
+        {% if session.get('is_admin') %}
+        <div style="margin-top: 1rem; text-align: right;">
+            <a href="{{ url_for('delete_background', bg_id=bg_item.background.id) }}"
+               class="cyber-button"
+               style="background: #aa0000; width: auto; font-size: 0.9rem; padding: 0.3rem 1rem;"
+               onclick="return confirm('Удалить предысторию {{ bg_item.background.name }}? Это действие необратимо.');">
+               Удалить
+            </a>
+        </div>
+        {% endif %}
+    </div>
+    {% else %}
+    <p>Предыстории пока не добавлены. Зайдите в админ-панель.</p>
+    {% endfor %}
+</div>
+{% endblock %}
