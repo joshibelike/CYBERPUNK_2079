@@ -1,4 +1,5 @@
 > *Сайт для ознакомления с НРИ по CYBERPUNK и полного старта.*
+> https://cyberpunk-2079--joshibelike.replit.app/
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat&logo=python)
 ![Flask](https://img.shields.io/badge/Flask-2.2%2B-black?style=flat&logo=flask)
